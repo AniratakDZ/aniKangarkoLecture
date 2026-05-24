@@ -1,0 +1,4 @@
+name: aniKangarkoLecture
+version: '0.1'
+main: de.regitstudios.aniKangarkoLecture.AniKangarkoLecture
+api-version: '1.21'
