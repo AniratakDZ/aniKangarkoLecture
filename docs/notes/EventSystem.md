@@ -6,21 +6,21 @@ Events sind Aktionen die im Spiel passieren oder von anderen Plugins ausgelöst 
 Auf dieser Seite findet man eine Auflistung aller Events von Spigot/Paper
 https://spigot-event-list.s7a.dev/en
 
-## Sync/Async
+# Sync/Async
 
-# Sync
+## Sync
 Die meisten Events passieren direkt im Mainthread. 
 Dort passiert in der Regel alles was direkt mit dem Spiel zusammen hängt. BlockBreakEvent, BlockPlaceEvent etc.
 Passiert im GettingStarted.md genannten Herzschlag.
 
-# Async
+## Async
 Einzelne Events z.B. Chat Events passieren in zusätzlichen Threads.
 Das sorgt dafür das wenn der Server gerade hängt, trotzdem noch im Chat geschrieben werden kann (Solange der Mainthread hängt).
 Passiert außerhalb des Herzschlags.
 
 Es gibt Events die Sync und Async bearbeitet werden können.
 
-## Eventlisteners
+# Eventlisteners
 Wenn im Herzschlag ein Event ausgelöst wird, schaut der Server in allen Klassen (auch aus den Plugins) nach ob einer dieser einen Listener implementiert hat für dieses Event.
 
 ## @EventHandler
