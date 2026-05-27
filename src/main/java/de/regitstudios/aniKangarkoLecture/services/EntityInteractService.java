@@ -1,9 +1,8 @@
 package de.regitstudios.aniKangarkoLecture.services;
 
+import de.regitstudios.aniKangarkoLecture.settings.CowSettings;
 import org.bukkit.Material;
-import org.bukkit.entity.Cow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
@@ -19,18 +18,27 @@ public class EntityInteractService {
             return;
         }
 
-        if(entity instanceof Cow cow && entity.hasMetadata("CowCannon") && player.getInventory().getItemInMainHand().getType() == Material.BUCKET) {
+        if(entity.getType() == CowSettings.getInstance().getExplodingEntityType() && entity.hasMetadata("CowCannon") && player.getInventory().getItemInMainHand().getType() == Material.BUCKET) {
 
             if(!player.hasPermission("cowcannon.cow.use")) {
                 player.sendMessage("You don't have permission to milk cows :)");
                 return;
             }
 
-            if(cow.isAdult()) {
+            if(!(entity instanceof LivingEntity livingEntity)) {
+                return;
+            }
+
+            if(!(livingEntity instanceof Ageable ageableEntity)) {
+                return;
+            }
+
+
+            if (ageableEntity.isAdult()) {
                 //Hier wird eine Explosion an der Stelle der Kuh erzeugt. 4F = TNT Stärke.
-                cow.getWorld().createExplosion(cow.getLocation(), 4F);
+                ageableEntity.getWorld().createExplosion(ageableEntity.getLocation(), 4F);
             } else {
-                cow.getWorld().createExplosion(cow.getLocation(), 20F);
+                ageableEntity.getWorld().createExplosion(ageableEntity.getLocation(), 20F);
             }
         }
     }
