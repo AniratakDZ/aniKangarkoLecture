@@ -20,6 +20,12 @@ public class EntityInteractService {
         }
 
         if(entity instanceof Cow cow && entity.hasMetadata("CowCannon") && player.getInventory().getItemInMainHand().getType() == Material.BUCKET) {
+
+            if(!player.hasPermission("cowcannon.cow.use")) {
+                player.sendMessage("You don't have permission to milk cows :)");
+                return;
+            }
+
             if(cow.isAdult()) {
                 //Hier wird eine Explosion an der Stelle der Kuh erzeugt. 4F = TNT Stärke.
                 cow.getWorld().createExplosion(cow.getLocation(), 4F);
@@ -33,6 +39,11 @@ public class EntityInteractService {
         final Player player = event.getPlayer();
         final Entity entity = event.getRightClicked();
         if(checkIfHandIsNotMainHand(event.getHand())) {
+            return;
+        }
+
+        if(!player.hasPermission("cowcannon.cow.use")) {
+            player.sendMessage("You don't have permission to milk cows :)");
             return;
         }
 
