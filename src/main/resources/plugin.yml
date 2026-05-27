@@ -2,3 +2,10 @@ name: aniKangarkoLecture
 version: '0.1'
 main: de.regitstudios.aniKangarkoLecture.AniKangarkoLecture
 api-version: '1.21'
+commands:
+  cow:
+    description: "Spawn an exploding cow"
+    usage: "/cow [baby]"
+    aliases: [ cowcannon ]
+    permission: cowcannon.command.cow
+    permission-message: "You do not have permission to spawn an exploding cow"
