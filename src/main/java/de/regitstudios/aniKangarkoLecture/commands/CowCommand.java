@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.*;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,6 +31,27 @@ public class CowCommand implements CommandExecutor, TabExecutor {
             commandSender.sendMessage("Only players can use this command");
             return true;
         }
+
+        /*
+        //BukkitRunnable braucht man für Timed Tasks
+        //Also Logik die innerhalb eines zeitlichen Rahmens ablaufen soll.
+        //Beispiel: Wartelobby für Minispiele. Countdown.
+        new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                //Jeder Task muss irgendwann aufhören.
+                //In diesem Fall würde der Task sofort aufhören sobald der Spieler den Server verlässt.
+                final Player player = (Player) commandSender;
+                if(!player.isOnline()) {
+                    cancel();
+                }
+            }
+        }.runTaskTimer(AniKangarkoLecture.getInstance(), 20, 1);
+        //.runTask() normaler Aufruf.
+        //.runTaskAsynchronously() bei diesem Aufruf lauft der Task außerhalb des Heartsbeat von Minecraft.
+        //Hier sollte KEINE Bukkit API benutzt werden. Am nützlichsten für Datenbank oder Config Files.
+         */
 
         //Hier fragen wir ab ob mehr als ein Argument gegeben wurde, falls ja darf es nur ein EntityType sein, falls /Cow set benutzt wurde.
         if(strings.length > 1) {
